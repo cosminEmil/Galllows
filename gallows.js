@@ -1,5 +1,10 @@
 let word;
 let nr = document.getElementById("nr");
+let modal1 = document.getElementById("myModal1");
+let modal2 = document.getElementById("myModal2");
+let span1 = document.getElementsByClassName("close")[0];
+let span2 = document.getElementsByClassName("close")[1];
+
 nr.setAttribute("value", 7);
 
 function generateWord() {
@@ -10,11 +15,6 @@ function generateWord() {
         let newTextBox = document.createElement("input");
         newTextBox.setAttribute("class", "dynamicInput");
         newTextBox.setAttribute("id", "textBox");
-        newTextBox.maxLength = 1; 
-        newTextBox.style.width = '20px';
-        newTextBox.style.borderTop = 'none';
-        newTextBox.style.borderLeft = 'none';
-        newTextBox.style.borderRight = 'none';
         container.appendChild(newTextBox);
         newTextBox.setAttribute("value", word[i]); 
         newTextBox.style.color = 'transparent';
@@ -35,13 +35,26 @@ function checkChar() {
         }
     }
     if (nr.value == 0) {
-        document.write("you're dead");
+        modal1.style.display = "block";
     }
     if (ok == 0) {
         --nr.value;
     } 
     if (alive == word.length) {
-        document.write("you're alive");
+        modal2.style.display = "block";
     }
 }
 
+span1.onclick = function() {
+    modal1.style.display = "none";
+}
+
+span2.onclick = function() {
+    modal2.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+}
